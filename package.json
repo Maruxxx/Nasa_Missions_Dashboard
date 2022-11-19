@@ -1,0 +1,27 @@
+{
+  "name": "nasa_mission_control",
+  "version": "1.0.0",
+  "description": "A Full-stack web application leading to control NASA missions such as rockets launches, planets discovery and more!",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
+    "install-all": "run install-server && run install-client",
+    "server": "npm run dev --prefix server",
+    "client": "npm start --prefix client",
+    "app": "concurrently \"npm run server\" \"npm run client\"",
+    "deploy": "npm run build --prefix client && npm start --prefix server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maruxxx/NASA_Mission_Control.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maruxxx/NASA_Mission_Control/issues"
+  },
+  "homepage": "https://github.com/Maruxxx/NASA_Mission_Control#readme"
+}
