@@ -1,4 +1,4 @@
-const HOST='https://nasamc.herokuapp.com'
+const HOST='http://localhost:8000'
 
 async function httpGetPlanets() {
   const response = await fetch(`${HOST}/planets`);

@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs');
 
 // Array for collecting data from steam.
-const habitablePlanets = [];
+const planets = require('./planets.schema')
 
 // Filtering function to arrange habitable planets on an array of objects.
 function isHabitablePlanet(planet) {
@@ -24,12 +24,13 @@ function loadPlanetsData() {
         }))
         .on('data', (c) => {
             if (isHabitablePlanet(c)) {
-                habitablePlanets.push(c)
+                return savePlanet(c)
             }
         })
         .on('error', (err) => reject(err))
-        .on('end', () => {
-            console.log(`${habitablePlanets.length} habitable planets found!`);
+        .on('end', async () => {
+            const countHabitablePlanets = (await getAllPlanets()).length
+            console.log(`${countHabitablePlanets} Habitable planets found!`)
             resolve();
         });
         
@@ -38,7 +39,21 @@ function loadPlanetsData() {
 
 
 function getAllPlanets() {
-    return habitablePlanets
+    return planets.find({})
+}
+
+async function savePlanet(planet) {
+    try {
+        await planets.updateOne({
+            keplerName: planet.kepler_name
+        }, {
+            keplerName: planet.kepler_name
+        }, {
+            upsert: true,
+        })
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 

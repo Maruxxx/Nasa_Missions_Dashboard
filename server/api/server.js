@@ -1,10 +1,11 @@
 // Http server configuration using express.js as a middleware.
+require('dotenv').config()
 const app = require('./app');
 const http = require('http');
 const mongoose = require('mongoose')
 const server = http.createServer(app);
 const port = process.env.PORT || 8000;
-const DB_URI = 'mongodb+srv://marux:hornet9512@nasa-mission-control.7szsobj.mongodb.net/?retryWrites=true&w=majority'
+const DB_URI = process.env.DB_URI
 
 const {loadPlanetsData} = require('./models/planets.model')
 
