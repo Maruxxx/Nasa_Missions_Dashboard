@@ -9,9 +9,7 @@ const planetsRoute = require('./routes/planets/planets.router');
 const launchesRoute = require('./routes/launches/launches.router');
 
 
-app.use(cors({
-    origin: "http://localhost:3000",
-}))
+app.use(cors())
 
 app.use(morgan('dev'))
 

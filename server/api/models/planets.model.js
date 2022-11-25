@@ -36,6 +36,7 @@ function loadPlanetsData() {
     })
 }
 
+
 function getAllPlanets() {
     return habitablePlanets
 }
