@@ -4,7 +4,6 @@ const launchesSchema = new mongoose.Schema({
     flightNumber: {
         type: Number,
         required: true,
-        default: 1,
     },
     mission: {
         type: String,
