@@ -21,9 +21,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "jest":{
-    "testEnvironment": "node"
-  },
   "bugs": {
     "url": "https://github.com/Maruxxx/NASA_Mission_Control/issues"
   },
