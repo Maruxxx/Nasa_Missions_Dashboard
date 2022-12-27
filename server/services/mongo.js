@@ -1,6 +1,6 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
-const DB_URI = 'mongodb+srv://marux:hornet9512@nasa-mission-control.7szsobj.mongodb.net/nasa-db?retryWrites=true&w=majority'
+const dbUrl = process.env.DB_URI
 
 mongoose.connection.once('open', () => {
     console.log('✅✅✅ Database connected successfully! ✅✅✅')
@@ -9,7 +9,7 @@ mongoose.connection.once('open', () => {
 mongoose.connection.on('error', (err) => console.error(err))
 
 async function mongoConnect() {
-    await mongoose.connect(DB_URI)
+    await mongoose.connect(dbUrl)
 }
 
 async function mongoDisconnect() {

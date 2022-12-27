@@ -1,21 +1,62 @@
 const launchesSchema = require('./launches.schema')
 const planetsSchema = require('./planets.schema')
 
+const axios = require('axios')
+
 let DEFAULT_Flight_Number = 1
 
 const launch = {
-    flightNumber: 100,
-    mission: 'Kepler Exploration X',
-    rocket: 'Explorer IS1',
-    launchDate: new Date('September 21, 2031'),
-    target: 'Kepler-442 b',
-    customers: ['Marux'],
-    upcoming: true,
-    success: true,
+    flightNumber: 100, // flight_number
+    mission: 'Kepler Exploration X', // name
+    rocket: 'Explorer IS1', // rocket.name
+    launchDate: new Date('September 21, 2031'), //date_local
+    target: 'Kepler-442 b', //not applicable yet
+    customers: ['Marux'], // payloads.customers
+    upcoming: true, // upcoming
+    success: true, // success
 };
 
 saveOne(launch)
 
+const SPACEX_API_URL = 'https://api.spacexdata.com/v4/launches/query'
+
+async function loadLaunchesData() {
+    const response = await axios.post(SPACEX_API_URL, {
+        query: {},
+        options: {
+            populate: [
+                {
+                    path: 'rocket',
+                    select: {
+                        name: 1
+                    }
+                },
+                {
+                    path: 'payloads',
+                    select: {
+                        customers: 1
+                    }
+                }
+            ]
+        }
+    })
+
+    const docs = response.data.docs
+    for (const doc of docs) {
+        const launch = {
+            
+            flightNumber: doc["flight_number"],
+            mission: doc["name"],
+            rocket: doc.rocket["name"],
+            launchDate: doc["date_local"],
+            target: 'Kepler-442 b', //not applicable yet
+            customers: doc.payloads["customers"], // payloads.customers
+            upcoming: doc["upcoming"], // upcoming
+            success: doc["success"], // success
+        
+        }
+    }
+}
 
 async function ifLaunchExists(launchId){
     return await launchesSchema.findOne({
@@ -83,15 +124,11 @@ async function abortLaunchById(launchId) {
 
     }) 
 
-
     return aborted.matchedCount === 1 && aborted.matchedCount === 1
-    // const aborted = launches.get(launchId)
-    // aborted.upcoming = false;
-    // aborted.success = false;
-    // return aborted
 }
 
 module.exports = {
+    loadLaunchesData,
     getAllLaunches,
     saveNewLaunch,
     ifLaunchExists,

@@ -10,14 +10,14 @@ describe("Testing LAUNCHES Api", () => {
 
     test('Get /launches', async () => { 
             await request(app)
-                .get('/launches')
+                .get('/v1/launches')
                 .expect(200)
                 .expect('Content-type', /json/)
         })
 
     test('Post /launches', async() => {
         const res = await request(app)
-            .post('/launches')
+            .post('/v1/launches')
             .send({
                 mission: "USS MARUX",
                 rocket: "IS9 ROCKY",
