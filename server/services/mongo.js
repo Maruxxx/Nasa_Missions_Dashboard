@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const dbUrl = process.env.DB_URI
 
 mongoose.connection.once('open', () => {
-    console.log('✅✅✅ Database connected successfully! ✅✅✅')
+    console.log('✅CONNECTED!')
 });
 
 mongoose.connection.on('error', (err) => console.error(err))
@@ -15,8 +15,6 @@ async function mongoConnect() {
 async function mongoDisconnect() {
     await mongoose.disconnect()
 }
-
-mongoDisconnect()
 
 module.exports = {
     mongoConnect,
