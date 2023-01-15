@@ -1,4 +1,4 @@
-name: NASA MISSION CI
+name: NASA Fullstack CI
 on:
   push:
     branches: [ main ]
@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 jobs:
   build: 
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js version 16
