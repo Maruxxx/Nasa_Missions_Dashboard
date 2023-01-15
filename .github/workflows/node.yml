@@ -1,4 +1,4 @@
-name: NASA Fullstack CI
+name: NASA Full-stack CI
 on:
   push:
     branches: [ main ]
