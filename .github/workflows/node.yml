@@ -6,10 +6,11 @@ on:
     branches: [ main ]
 jobs:
   build: 
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js version 16
         uses: actions/setup-node@v3
-      - run: npm install
-      - run: npm run install-server
+        with:
+          node-version: 16
+      - run: npm install-server
