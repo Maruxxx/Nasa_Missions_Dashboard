@@ -1,4 +1,4 @@
-const HOST='http://localhost:4000/v1'
+const HOST='v1'
 
 async function httpGetPlanets() {
   const response = await fetch(`${HOST}/planets`);
