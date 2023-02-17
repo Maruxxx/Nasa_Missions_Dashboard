@@ -1,13 +1,8 @@
-// Http server configuration using express.js as a middleware.
+// Https server configuration using express.js as a middleware.
 require('dotenv').config()
 const app = require('./app');
-const https = require('https');
-const path = require('path')
-const fs = require('fs')
-const server = https.createServer({
-    key: fs.readFileSync(path.join(__dirname, '..', 'privateKey.key')),
-    cert: fs.readFileSync(path.join(__dirname, '..', 'certificate.crt'))
-}, app)
+const http = require('http');
+const server = http.createServer(app)
 const port = process.env.PORT || 80;
 
 
