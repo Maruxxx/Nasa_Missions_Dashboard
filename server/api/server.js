@@ -1,6 +1,6 @@
 // Https server configuration using express.js as a middleware.
 require('dotenv').config()
-const app = require('./app');
+const app = require('./index');
 const http = require('http');
 const server = http.createServer(app)
 const port = process.env.PORT || 80;
